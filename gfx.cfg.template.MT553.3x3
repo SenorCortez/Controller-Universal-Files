@@ -1,0 +1,56 @@
+master:
+{
+  Device = { x = 0; y = 0; w = 5760; h = 3240; };
+  NumSlaves = 3;
+  SwapInterval = -1;
+  PPI = 40.0;
+};
+
+slaves =
+(
+  { Panel = # Physical Offset
+    { x = 0;
+      y = 0;
+      w = 5760;
+      h = 1080;
+    };
+    PanelV = # Virtual (World) Offset
+    { x = 0;
+      y = 0;
+      w = 5760;
+      h = 1080;
+    };   
+    PanelScreenId = 0; # X11 screen ID
+  },
+  { Panel = # Physical Offset
+    { x = 0;
+      y = 0;
+      w = 5760;
+      h = 1080;
+    };
+    PanelV = # Virtual (World) Offset
+    { x = 0;
+      y = 1080;
+      w = 5760;
+      h = 1080;
+    };   
+    PanelScreenId = 1; # X11 screen ID
+  },
+  { Panel = # Physical Offset
+    { x = 0;
+      y = 0;
+      w = 5760;
+      h = 1080;
+    };
+    PanelV = # Virtual (World) Offset
+    { x = 0;
+      y = 2160;
+      w = 5760;
+      h = 1080;
+    };   
+    PanelScreenId = 2; # X11 screen ID
+  }
+);
+
+application_opengl_providers = (0, 1, 2);
+

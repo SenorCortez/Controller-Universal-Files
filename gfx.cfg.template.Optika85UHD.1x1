@@ -1,0 +1,25 @@
+master:
+{
+  Device = { x = 0; y = 0; w = 3840; h = 2160; };
+  NumSlaves = 1;
+  SwapInterval = -1;
+  PPI = 51.8;
+};
+
+slaves =
+(
+  { Panel = # Physical Offset
+    { x = 0;
+      y = 0;
+      w = 3840;
+      h = 2160;
+    };
+    PanelV = # Virtual (World) Offset
+    { x = 0;
+      y = 0;
+      w = 3840;
+      h = 2160;
+    };
+    PanelScreenId = 0; # X11 screen ID
+  }
+);

@@ -1,0 +1,41 @@
+# For the purposes of this configuration file, a 'cell' is a display unit, such
+# as a MultiTaction display, OR a regular monitor. Even if not all of your
+# cells are touch-enabled, they must be accounted for in this configuration
+# file. The reason for this is that Winmaster must know the entire width and
+# height of the display array in order to generate a correct transformation
+# matrix for each touch-enabled cell.
+#
+# For example, if you had an 8x3 display array, but only the upper left 2x2
+# block were actually touch-enabled, you might be tempted to set width=2 and
+# height=2 in this configuration file. This would have the effect that the
+# upper left touch cell's input would be expanded relative to the display array
+# dimensions, and appear across the entire first four columns and one and a
+# half rows of the display array (and similar effects for the other touch
+# cells).
+
+# Width and height of the display cell array, in cells. The product of these
+# two numbers is the number of cells total that Winmaster will listen for.
+width = 1;
+height = 1;
+
+# If cells are pre-rotated in place, set their rotation angle here, in degrees
+# counter-clockwise. For example, if the cells were rotated 90 degrees to the
+# left, you would use 'rotate = 90;'. If the cells were rotated 90 degrees to
+# the right, you would use 'rotate = 270;'.
+rotate = 0;
+
+# Winmaster will listen for TUIO frames on /n/ UDP ports,
+# where /n/ = width * height. The 'startport' is the port that will be assigned
+# to the upper left cell. Cell ports will be assigned in order by column,
+# continuing on subsequent rows. For example, if you have a display cell
+# array in a 3x2 configuration, and your startport were set to 40001, the cells
+# would be numbered like so:
+#
+# +-------+-------+-------+
+# | 40001 | 40002 | 40003 |
+# +-------+-------+-------+
+# | 40004 | 40005 | 40006 |
+# +-------+-------+-------+
+startport = 40001;
+
+capslockhack = true; // 2014-08-29: added by pshuang

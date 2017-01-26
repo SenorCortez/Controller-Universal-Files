@@ -1,0 +1,1 @@
+SUBSYSTEMS=="usb", DRIVERS=="usb", ATTRS{manufacturer}=="Logitech", ATTRS{product}=="USB Receiver", ACTION=="add", RUN+="/usr/local/bin/fix-logitech-keyboard.sh"

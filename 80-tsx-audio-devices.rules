@@ -1,0 +1,26 @@
+# Commands to gather info about a new hotpluggable device
+#  Turn device off
+# As root: udevadm monitor --property > attach.txt
+#  Turn device on
+#  ctrl-c
+#  As root: udevadm monitor --property > detach.txt
+#  Turn device off
+#  ctrl-C
+# Inspect the attach.txt to create a udev rule for when the device is added (often a change event for USB  audio)
+# Inspect detach.txt to create a udev rule for when the device is removed.
+
+# Note that for both scenarios, you need to make sure the device is fully attached or detached before running the
+# script because the device needs to have been registered with Pulse Audio first.
+# Note 2:  Insure that your rule only gets called once when the device is plugged in, and once when it is unplugged.  We
+# restart tsx so browsers, youtube videos, etc can pickup the change, nd only want to do this once per plug/unplug.
+# Clean up after yourself by deleting attach.txt and detach.txt
+#
+# Test your rules by tail -f /var/log/bluescape.log and plugging/unplugging your device.
+
+# change is the last event we get pertaining to the Scarlett when it's plugged in.
+ACTION=="change", SUBSYSTEM=="sound", ENV{ID_MODEL}=="Scarlett_2i2_USB", RUN += "/bin/su - runtime -c '/usr/local/bin/tsx-set-audio-device -r &'"
+ACTION=="remove", SUBSYSTEM=="usb",   ENV{ID_MODEL}=="Scarlett_2i2_USB", RUN += "/bin/su - runtime -c '/usr/local/bin/tsx-set-audio-device -r &'"
+
+# Surface Hub
+ACTION=="remove", SUBSYSTEM=="usb", ENV{ID_VENDOR}=="Microsoft", ENV{ID_MODEL}=="Surface_Hub", RUN += "/bin/su - runtime -c '/usr/local/bin/tsx-set-audio-device -r &'"
+ACTION=="change", ENV{ID_VENDOR}=="Microsoft", ENV{ID_MODEL}=="Surface_Hub", RUN += "/bin/su - runtime -c '/usr/local/bin/tsx-set-audio-device -r &'"
